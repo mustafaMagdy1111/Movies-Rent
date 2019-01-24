@@ -1,0 +1,15 @@
+﻿@model Movies_Rent.Models.Movie
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    <li><h4>Released Data  </h4>  @Model.ReleaseDate</li>
+    <li><h4>Genre Type  </h4>@Model.Genre.Name</li>
+    <li><h4>Date Added  </h4>@Model.DateAdded</li>
+    <li><h4>Number In Stocks  </h4> @Model.NumberInStocks</li>
+ 
+
+</ul>
+

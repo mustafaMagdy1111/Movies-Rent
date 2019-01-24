@@ -1,0 +1,42 @@
+﻿@model Movies_Rent.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Customer</h2>
+@using (Html.BeginForm("Save", "Customer"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.name)
+        @Html.TextBoxFor(m => m.Customer.name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(M => M.Customer.name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Birthdate)
+        @Html.TextBoxFor(m => m.Customer.Birthdate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(M => M.Customer.Birthdate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MemberShipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MemberShipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(M => M.Customer.MemberShipTypeId)
+    </div>
+    <div class="checkbox">
+        @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewLetter) Subscribed to New Letter
+    </div>
+    @Html.HiddenFor(m => m.Customer.id);
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn-primary">Save</button>
+
+}
+
+@section scripts
+{
+   <script>
+
+    </script>
+
+
+}

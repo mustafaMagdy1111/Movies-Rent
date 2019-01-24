@@ -1,0 +1,145 @@
+﻿@model Movies_Rent.ViewModels.customermovie
+
+@{
+    ViewBag.Title = "New Rental Form";
+}
+
+<h2>New Rental Form</h2>
+
+@*<form id="newRental">
+        <div class="form-group">
+            <label>Customer</label>
+            <div class="tt-container">
+                <input id="customer" type="text" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Movie</label>
+            <div class="tt-container">
+                <input id="movie" type="text" value="" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <ul id="movies" class="list-group"></ul>
+            </div>
+        </div>
+
+        <button class="btn btn-primary">Submit</button>
+    </form>*@
+    @*@section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                var vm = {
+                    movieIds: []
+                };
+                var customers = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/api/customer?query=%QUERY',
+                        wildcard: '%QUERY'
+                    }
+                });
+                $('#customer').typeahead({
+                    minLength: 3,
+                    highlight: true
+                }, {
+                        name: 'customer',
+                        display: 'name',
+                        source: customers
+                    }).on("typeahead:select", function (e, customer) {
+                        vm.customerId = customer.id;
+                    });
+                var movies = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    remote: {
+                        url: '/api/movies?query=%QUERY',
+                        wildcard: '%QUERY'
+                    }
+                });
+                $('#movie').typeahead({
+                    minLength: 3,
+                    highlight: true
+                }, {
+                        name: 'movies',
+                        display: 'name',
+                        source: movies
+                    }).on("typeahead:select", function (e, movie) {
+                        $("#movies").append("<li class='list-group-item'>" + movie.id + "</li>");
+                        $("#movie").typeahead("val", "");
+
+                        vm.movieIds.push(movie.id);
+                    });
+                $("#newRental").submit(function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: "/api/Rental",
+                        method: "post",
+                        data: vm
+                    })
+                        .done(function () {
+                            toastr.success("Rentalls succesfully Recoreded")
+                        })
+                        .fail(function () {
+                            toastr.success("Rentalls Failed to Recored")
+                        });
+
+                })
+
+            });
+        </script>
+    }*@
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/jquery.sumoselect.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.0.2/sumoselect.css" rel="stylesheet" />
+
+<style>
+    .SumoSelect .select-all {
+        border-radius: 3px 3px 0 0;
+        position: relative;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        padding: 0px 0 3px 35px;
+        height: 20px;
+        cursor: pointer;
+    }
+</style>
+
+@using (Html.BeginForm("save", "NewRental"))
+{
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.customer)
+        @Html.DropDownListFor(m => m.customer,
+        Model.customers,
+       "Select customer", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.movies)
+        <br>
+        @Html.DropDownListFor(m => m.CustmoerMovies,
+       Model.movies
+       , new { @class = "testSelAll ", @multiple= "multiple" })
+    </div>
+
+
+
+    <input type="submit" value="Search" class="btn-primary">
+}
+
+<script>
+
+    $(document).ready(function () {
+        window.testSelAll = $('.testSelAll').SumoSelect({ okCancelInMulti: true, selectAll: true });
+    });
+
+</script>

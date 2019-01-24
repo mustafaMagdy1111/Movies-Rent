@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Vidly01.Models;
+using Movies_Rent.Models;
 
 namespace Movies_Rent
 {

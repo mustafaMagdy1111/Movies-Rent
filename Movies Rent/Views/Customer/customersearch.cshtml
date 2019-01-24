@@ -1,0 +1,20 @@
+﻿@model Movies_Rent.ViewModels.customermovie
+
+@{
+    ViewBag.Title = "customersearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>customersearch</h2>
+
+
+@*@Html.DropDownListFor(m => m.xa, new { @class = "form-control" })*@
+
+<div class="form-group">
+    @*@Html.LabelFor(m => m.customers)
+    @Html.DropDownListFor(model =>
+        model.customers,
+        new SelectList(Model.customers)
+        "-- Select Status --"*@
+    )
+</div>
