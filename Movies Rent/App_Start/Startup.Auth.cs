@@ -5,7 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Movies_Rent.Models;
+using Vidly01.Models;
 
 namespace Movies_Rent
 {
@@ -54,9 +54,9 @@ namespace Movies_Rent
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1463231973809619",
+               appSecret: "99232c30a2902cf1027fac7fd25dddcf");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
